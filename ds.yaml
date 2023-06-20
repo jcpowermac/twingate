@@ -22,7 +22,7 @@ spec:
           value: "213"
         - name: STATUS_FILE
           value: "/status/failing"
-        image: quay.io/ocp-splat/cluster-health:latest
+        image: image-registry.openshift-image-registry.svc:5000/twingate/infra-check
         imagePullPolicy: Always
         livenessProbe:
           exec:

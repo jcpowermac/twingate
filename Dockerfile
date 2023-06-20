@@ -1,9 +1,12 @@
-FROM quay.io/centos/centos:stream8
+FROM quay.io/centos/centos:stream9
+
+COPY run.sh network-check.sh /
 
 RUN dnf upgrade --refresh -y && \
     curl https://binaries.twingate.com/client/linux/install.sh | bash && \
-    dnf install iproute -y
+    dnf install iproute iputils -y
 
-ENTRYPOINT [ "twingate", "start" ]
-CMD ["tail", "-f", "/dev/null"]
+#ENTRYPOINT [ "twingate", "start" ]
+#CMD ["tail", "-f", "/dev/null"]
 
+ENTRYPOINT ["/run.sh"]
