@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:stream9
+FROM quay.io/app-sre/ubi8-ubi:latest
 
 COPY run.sh network-check.sh /
 
