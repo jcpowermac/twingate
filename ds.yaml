@@ -16,6 +16,10 @@ spec:
         - sleep
         - infinity
         env:
+        - name: NUM_PING
+          value: "10"
+        - name: MAX_LOSSES
+          value: "3"
         - name: SEG_START
           value: "200"
         - name: SEG_END
