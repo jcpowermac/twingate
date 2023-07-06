@@ -5,7 +5,10 @@ source network-check.sh
 trap "cd /tmp; twingate report; cat /var/log/twingated.log; twingate stop" EXIT;
 
 
-filenumber=$(shuf -n 1 -i 1-4 --random-source <(printf "%s" "$HOSTNAME"))
+# hostname is too similar, keeping for ref.
+#filenumber=$(shuf -n 1 -i 1-4 --random-source <(printf "%s" "$HOSTNAME"))
+
+filenumber=$(shuf -n 1 -i 1-4)
 
 sleep 5
 twingate --version
