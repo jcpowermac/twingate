@@ -7,6 +7,7 @@ trap "cd /tmp; twingate report; cat /var/log/twingated.log; twingate stop" EXIT;
 sleep 5
 twingate --version
 twingate setup --headless /secret/credentials.json
+twingate config log-level debug
 twingate start
 
 while true; do
