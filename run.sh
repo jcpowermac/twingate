@@ -10,6 +10,8 @@ trap "cd /tmp; twingate report; cat /var/log/twingated.log; twingate stop" EXIT;
 
 filenumber=$(shuf -n 1 -i 1-4)
 
+echo "Using /secret/credentials${filenumber}.json"
+
 sleep 5
 twingate --version
 twingate setup --headless "/secret/credentials${filenumber}.json"
