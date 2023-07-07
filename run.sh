@@ -8,7 +8,7 @@ trap "cd /tmp; twingate report; cat /var/log/twingated.log; twingate stop" EXIT;
 # hostname is too similar, keeping for ref.
 #filenumber=$(shuf -n 1 -i 1-4 --random-source <(printf "%s" "$HOSTNAME"))
 
-filenumber=$(shuf -n 1 -i 1-4)
+filenumber=$(shuf -n 1 -i 1-20)
 
 echo "Using /secret/credentials${filenumber}.json"
 
