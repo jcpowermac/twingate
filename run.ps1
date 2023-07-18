@@ -36,8 +36,8 @@ while ($true) {
 
         Send-SlackMessage -Uri $Env:SLACK_WEBHOOK_URI -Text ($errmessage -f $cihash[$key].vcenter, $errStr)
 
-        twingate report
         twingate stop
+        twingate report
         Start-Sleep -Seconds 10
         twingate start
 
