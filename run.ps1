@@ -23,28 +23,28 @@ twingate start
 while ($true) {
     Start-Sleep -Seconds 60
     # Only check ibmc
-    $key = "ibm8"
-
-    try {
-        Connect-VIServer -Server $cihash[$key].vcenter -Credential (Import-Clixml $cihash[$key].secret) | Out-Null
-        $vm = Get-VM
-        $vm.Count
-    }
-    catch {
-        $caught = Get-Error
-        $errStr = $caught.ToString()
-
-        Send-SlackMessage -Uri $Env:SLACK_WEBHOOK_URI -Text ($errmessage -f $cihash[$key].vcenter, $errStr)
-
-        twingate stop
-        twingate report
-        Start-Sleep -Seconds 10
-        twingate start
-
-    }
-    finally {
-        Disconnect-VIServer -Server * -Force:$true -Confirm:$false
-    }
+#    $key = "ibm8"
+#
+#    try {
+#        Connect-VIServer -Server $cihash[$key].vcenter -Credential (Import-Clixml $cihash[$key].secret) | Out-Null
+#        $vm = Get-VM
+#        $vm.Count
+#    }
+#    catch {
+#        $caught = Get-Error
+#        $errStr = $caught.ToString()
+#
+#        Send-SlackMessage -Uri $Env:SLACK_WEBHOOK_URI -Text ($errmessage -f $cihash[$key].vcenter, $errStr)
+#
+#        twingate stop
+#        twingate report
+#        Start-Sleep -Seconds 10
+#        twingate start
+#
+#    }
+#    finally {
+#        Disconnect-VIServer -Server * -Force:$true -Confirm:$false
+#    }
 }
 
 exit 0
