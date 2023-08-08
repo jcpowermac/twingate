@@ -12,7 +12,15 @@ Hostname: $($Env:HOSTNAME)
 Twingate restarted
 "@
 
+$killmessage = @"
+vCenter: {0}
+Error: {1}
+Hostname: $($Env:HOSTNAME)
+Pod killed
+"@
+
 $fileNumber = Get-Random -Minimum 1 -Maximum 16
+$failCount = 0
 
 twingate --version
 twingate setup --headless "/secret/credentials$($fileNumber).json"
@@ -31,8 +39,14 @@ while ($true) {
         $vm.Count
     }
     catch {
+        $failCount++
         $caught = Get-Error
         $errStr = $caught.ToString()
+
+        if ($failCount -eq 10) {
+            Send-SlackMessage -Uri $Env:SLACK_WEBHOOK_URI -Text ($killmessage -f $cihash[$key].vcenter, $errStr)
+            exit 1
+        }
 
         Send-SlackMessage -Uri $Env:SLACK_WEBHOOK_URI -Text ($errmessage -f $cihash[$key].vcenter, $errStr)
 
@@ -40,7 +54,6 @@ while ($true) {
         twingate report
         Start-Sleep -Seconds 10
         twingate start
-
     }
     finally {
         Disconnect-VIServer -Server * -Force:$true -Confirm:$false
