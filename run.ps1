@@ -31,7 +31,7 @@ twingate start
 while ($true) {
     Start-Sleep -Seconds 60
     # Only check ibmc
-    $key = "ibm8"
+    $key = "devqe"
 
     try {
         Connect-VIServer -Server $cihash[$key].vcenter -Credential (Import-Clixml $cihash[$key].secret) | Out-Null
