@@ -16,6 +16,8 @@ spec:
         - sleep
         - infinity
         env:
+        - name: TWINGATE_LOG_LEVEL
+          value: "7"
         - name: NUM_PING
           value: "10"
         - name: MAX_LOSSES
